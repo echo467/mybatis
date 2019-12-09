@@ -5,7 +5,7 @@ import com.ananopsmaster.eureka.company.demo.model.Company;
 import java.util.List;
 
 public interface CompanyMapper {
-    List<Company> list();
+    List<Company> getCompanyList();
 
     int deleteByPrimaryKey(Long id);
 

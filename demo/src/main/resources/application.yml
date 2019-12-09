@@ -18,5 +18,5 @@ spring:
       validation-query: SELECT 1 FROM test # 用来检测连接是否有效的sql
 
 mybatis:
-  mapper-locations: com.mapping/*.xml
+  mapper-locations: classpath*:/mapping/*.xml
   type-aliases-package: com.ananopsmaster.eureka.company.demo.model

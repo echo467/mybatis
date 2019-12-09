@@ -1,8 +1,8 @@
 package com.ananopsmaster.eureka.company.demo.service.impl;
 
-import com.ananopsmaster.eureka.company.demo.mapper.CompanyMapper;
-import com.ananopsmaster.eureka.company.demo.model.Company;
-import com.ananopsmaster.eureka.company.demo.service.CompanyServices;
+import com.ananopsmaster.eureka.company.demo.mapper.EngineerMapper;
+import com.ananopsmaster.eureka.company.demo.model.Engineer;
+import com.ananopsmaster.eureka.company.demo.service.EngineerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,28 +10,28 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CompanyServicesImpl implements CompanyServices {
+public class EngineerServicesImpl implements EngineerServices {
     @Autowired
-    private CompanyMapper companyMapper;
+    private EngineerMapper engineerMapper;
 
     @Transactional
     @Override
-    public List<Company> getCompanyList() {
-        return companyMapper.getCompanyList();
+    public List<Engineer> getEngineerList() {
+        return engineerMapper.getEngineerList();
     }
 
     @Transactional
     @Override
-    public Company getCompanyById(long companyId) {
-        return companyMapper.selectByPrimaryKey(companyId);
+    public Engineer getEngineerById(long engineerId) {
+        return engineerMapper.selectByPrimaryKey(engineerId);
     }
 
     @Transactional
     @Override
-    public boolean addCompany(Company company) {
-        if(company.getId()!=null){
+    public boolean addEngineer(Engineer engineer) {
+        if(engineer.getId()!=null){
             try{
-                int effectedNum = companyMapper.insert((company));
+                int effectedNum = engineerMapper.insert((engineer));
                 if(effectedNum>0){
                     return true;
                 }else{
@@ -41,18 +41,16 @@ public class CompanyServicesImpl implements CompanyServices {
                 throw new RuntimeException("添加失败:"+e.toString());
             }
         } else {
-            throw new RuntimeException("公司id不能为空");
+            throw new RuntimeException("工程师id不能为空");
         }
     }
 
     @Transactional
     @Override
-    public boolean addCompanySelective(Company company) {
-        //System.out.println(company.getId());
-        //if(company.getId()!=null&&"".equals(company.getId())){
-        if(company.getId()!=null){
+    public boolean addEngineerSelective(Engineer engineer) {
+        if(engineer.getId()!=null){
             try{
-                int effectedNum = companyMapper.insertSelective(company);
+                int effectedNum = engineerMapper.insertSelective(engineer);
                 if(effectedNum>0){
                     return true;
                 }else{
@@ -62,16 +60,16 @@ public class CompanyServicesImpl implements CompanyServices {
                 throw new RuntimeException("添加失败:"+e.toString());
             }
         } else {
-            throw new RuntimeException("公司id不能为空");
+            throw new RuntimeException("工程师id不能为空");
         }
     }
 
     @Transactional
     @Override
-    public boolean deleteCompany(long companyId) {
-        if(companyId>0){
+    public boolean deleteEngineer(long engineerId) {
+        if(engineerId>0){
             try{
-                int effectedNum = companyMapper.deleteByPrimaryKey(companyId);
+                int effectedNum = engineerMapper.deleteByPrimaryKey(engineerId);
                 if(effectedNum>0){
                     return true;
                 }else{
@@ -81,17 +79,16 @@ public class CompanyServicesImpl implements CompanyServices {
                 throw new RuntimeException("删除失败:"+e.toString());
             }
         } else {
-            throw new RuntimeException("公司id不存在");
+            throw new RuntimeException("工程师id不存在");
         }
     }
 
     @Transactional
     @Override
-    public boolean modifyCompany(Company company) {
-        //System.out.println(company.getId());
-        if (company.getId() != null && company.getId() > 0) {
+    public boolean modifyEngineer(Engineer engineer) {
+        if (engineer.getId() != null && engineer.getId() > 0) {
             try {
-                int effectedNum = companyMapper.updateByPrimaryKey(company);
+                int effectedNum = engineerMapper.updateByPrimaryKey(engineer);
                 if (effectedNum > 0) {
                     return true;
                 } else {
@@ -101,16 +98,16 @@ public class CompanyServicesImpl implements CompanyServices {
                 throw new RuntimeException("修改失败:" + e.toString());
             }
         } else {
-            throw new RuntimeException("公司id不存在");
+            throw new RuntimeException("工程师id不存在");
         }
     }
 
     @Transactional
     @Override
-    public boolean modifyCompanySelective(Company company) {
-        if (company.getId() != null && company.getId() > 0) {
+    public boolean modifyEngineerSelective(Engineer engineer) {
+        if (engineer.getId() != null && engineer.getId() > 0) {
             try {
-                int effectedNum = companyMapper.updateByPrimaryKeySelective(company);
+                int effectedNum = engineerMapper.updateByPrimaryKeySelective(engineer);
                 if (effectedNum > 0) {
                     return true;
                 } else {
@@ -120,7 +117,7 @@ public class CompanyServicesImpl implements CompanyServices {
                 throw new RuntimeException("修改失败:" + e.toString());
             }
         } else {
-            throw new RuntimeException("公司id不存在");
+            throw new RuntimeException("工程师id不存在");
         }
     }
 }
